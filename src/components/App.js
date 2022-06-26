@@ -29,13 +29,16 @@ const thumbsDown = () => {
     <h2>{video.title}</h2>
     <span>{video.views} Views | Uploaded {video.createdAt}</span>
     <div><button onClick={thumbsUp}>👍{upVote}</button><button onClick={thumbsDown}>👎{downVote}</button></div>
-    <div className="hideComments" ><button onClick={() =>{setIsHidden(!isHidden)}}>Hide Comments</button></div>
+    <div className="hideComments" ><button onClick={() =>{setIsHidden(!isHidden)}}>{!isHidden? "Show Comments": "Hide Comments"}</button></div>
+    
+    {!isHidden ? null : 
+    <React.Fragment>
     <div><h2>{video.comments.length} Comments</h2></div>
-    {!isHidden ? null : <div>{video.comments.map((comment) =>{
+    <div>{video.comments.map((comment) =>{
     
     return <Comment key={comment.id} comment={comment.comment} user={comment.user}/>
 
-  })}</div>}
+  })}</div> </React.Fragment>}
 
     </div>
   );
